@@ -58,7 +58,7 @@ color: light
 
 - 2020 – 2022: MSc. AI at University of Amsterdam
 
-  - Thesis on meta-learning, morphology and NMT
+  - Thesis on meta-learning, morphology and translation
 
   - Took ATCS in 2021
 
@@ -363,37 +363,358 @@ align: l-lt-lt
 What makes the Transformer what it is --- and where it came from
 
 ---
-layout: default
-color: light
+layout: side-title
+color: dark
+hideInToc: true
+side: l
+titlewidth: is-5
+align: lm-mt
 ---
+
+:: title::
 
 ## <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
 
-$$ {1|3|all}
-\begin{aligned}
-\nabla \cdot \vec{E} &= \frac{\rho}{\varepsilon_0} \\
-\nabla \cdot \vec{B} &= 0 \\
-\nabla \times \vec{E} &= -\frac{\partial\vec{B}}{\partial t} \\
-\nabla \times \vec{B} &= \mu_0\vec{J} + \mu_0\varepsilon_0\frac{\partial\vec{E}}{\partial t}
-\end{aligned}
-$$
+:: content ::
+
+<figure>
+  <img src="./figures/transformer_svg.svg" style="width:100%;display: block;margin-left: auto;margin-right: auto;">
+</figure>
 
 ---
-layout: default
-color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-lt
 ---
-
+:: title ::
 ### Definition & Properties
 
 ##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
 
+:: left ::
+
+- Let $\mathbf{V}$ be a matrix of (word) vectors
+  - It has a sequence length of $T_{V}$
+  - It has a dimensionality of $D$
+
+<br>
+
+<v-click>
+
+- $\mathtt{Attention}$ is just a matrix product of $\mathbf{V}$ with an attention matrix $\mathbf{A}$
+  - $\mathbf{A}$ is a square matrix of size $T_{V}\times T_{V}$
+  - It's elements are all between $(0, 1)$
+  - It's rows sum to $1$
+
+</v-click>
+
+:: right ::
+
+$${3|all}
+\begin{align*}
+  &\mathtt{Attention}(?, ?, \mathbf{V})=\mathbf{A}\mathbf{V} \\
+  &\quad\mathbf{A}\in(0,1)^{[T_{V}\times T_{V}]} \\
+  &\quad\mathbf{V}\in\mathbb{R}^{[T_{V}\times D]}
+\end{align*}
+$$
+
+---
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+hideInToc: true
+---
+:: title ::
+### Definition & Properties
+
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+:: left ::
+
+- The result of $\mathtt{Attention}$ is just a [convex combination](https://en.wikipedia.org/wiki/Convex_combination) of $\mathbf{V}$
+
+$$
+\overset{\mathbf{A}}{
+  \begin{bmatrix}
+    0.6 & 0.1 & 0.3 \\
+    0.3 & 0.5 & 0.2 \\
+    0.2 & 0.1 & 0.7 \\
+  \end{bmatrix}
+}
+\overset{\mathbf{V}}{
+  \begin{bmatrix}
+    \phantom{-}2.0 & \phantom{-}1.0 \\
+    -0.5 & \phantom{-}2.0 \\
+    -1.0 & -0.5 \\
+  \end{bmatrix}
+}
+\begin{matrix}
+  \text{\color{red}{I}} \\
+  \text{\color{green}{am}} \\
+  \text{\color{blue}{Sam}} \\
+\end{matrix}
+$$
+
+<v-click>
+
+$$
+=
+\begin{bmatrix}
+  0.6 * \text{\color{red}{I}} + 0.1 * \text{\color{green}{am}} + 0.3 * \text{\color{blue}{Sam}} \\
+  0.3 * \text{\color{red}{I}} + 0.5 * \text{\color{green}{am}} + 0.2 * \text{\color{blue}{Sam}} \\
+  0.2 * \text{\color{red}{I}} + 0.1 * \text{\color{green}{am}} + 0.7 * \text{\color{blue}{Sam}} \\
+\end{bmatrix}
+$$
+
+</v-click>
+
+:: right ::
+
+<figure style="position: relative;top: 0;left: 0;">
+    <img v-after.hide src="./figures/word_vectors.svg" style="position: relative;width: 400px;top: 0;left: 0;">
+    <img v-after src="./figures/adjusted_word_vectors.svg" style="position: absolute;width: 400px;top: 0%;">
+</figure>
+
+---
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+hideInToc: true
+---
+:: title ::
+### Definition & Properties
+
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+:: left ::
+
+<br>
+
+<Admonition title="Convex Combination" color="light" width="100%" icon="mdi-pencil">
+
+The elements of $V^\prime$ will lie inside the convex hull of all of the elements in $V$
+
+</Admonition>
+
+<v-click>
+<Admonition title="Permutation Equivariance" color="light" width="100%" icon="mdi-pencil">
+
+The elements of $V^\prime$ are *equivariant* to a change in the order of the rows of $\mathbf{A}$
+
+</Admonition>
+
+- Attention does not care about word order
+
+</v-click>
+
+:: right ::
+
+<figure style="position: relative;top: 0;left: 0;">
+    <img v-after.hide src="./figures/attention_as_convex_combination.svg" style="position: relative;width: 400px;top: 0;left: 0;">
+    <img v-after src="./figures/attention_permutation_equivariant.drawio.svg" style="position: absolute;width: 400px;top: 0%;">
+</figure>
+
 ---
 layout: default
-color: light
+columns: is-6
+align: l-lt-ct
+hideInToc: true
 ---
+### Definition & Properties
 
-### Non-Transformer Examples
 ##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+<br>
+
+So is $\mathtt{Attention}$ just a linear map?
+  - Not quite
+
+<br>
+
+Linear maps are:
+
+<div class="ns-c-tight">
+<v-clicks>
+
+- Inflexible in terms of sequence length
+- Parameter inefficient
+- Invariant to the input content
+
+</v-clicks>
+</div>
+
+---
+layout: two-cols-title
+columns: is-6
+align: l-lt-lt
+hideInToc: true
+---
+:: title ::
+### Definition & Properties
+
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+:: left ::
+
+<div class="ns-c-tight">
+
+- Let $\mathbf{V}$ be a matrix of **value** vectors
+  - It has a sequence length of $T_{V}$
+  - It has a dimensionality of $D_{V}$
+
+- Let $\mathbf{K}$ be a matrix of **key** vectors
+  - It has a sequence length of $T_{V}$
+  - It has a dimensionality of $D_{Q}$
+
+- Let $\mathbf{Q}$ be a matrix of **query** vectors
+  - It has a sequence length of $T_{Q}$
+  - It has a dimensionality of $D_{Q}$
+
+<div v-click>
+
+- Let $f(\mathbf{Q}, \mathbf{K})$ be some kernel function
+  - Read: similarity function
+
+</div>
+
+</div>
+
+:: right ::
+
+$${3,4,5|all}
+\begin{align*}
+&\mathtt{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V})=\underbrace{\mathtt{softmax}\left(f\left(\mathbf{Q}, \mathbf{K}\right)\right)}_{\mathbf{A}}\mathbf{V} \\
+&\quad\mathbf{A}\in(0,1)^{[T_{Q}\times T_{V}]} \\
+&\quad\mathbf{V}\in\mathbb{R}^{[T_{V}\times D_{V}]} \\
+&\quad\mathbf{K}\in\mathbb{R}^{[T_{V}\times D_{Q}]} \\
+&\quad\mathbf{Q}\in\mathbb{R}^{[T_{Q}\times D_{Q}]} \\
+\end{align*}
+$$
+
+---
+layout: two-cols-title
+columns: is-6
+align: l-lt-cm
+hideInToc: false
+---
+:: title ::
+### Non-Transformer Examples
+
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+:: left ::
+
+<div class="ns-c-tight">
+
+- $\mathbf{V}$ contains information
+- $\mathbf{K}$ contains information about information (i.e, metadata)
+- $\mathbf{Q}$ contains metadata about what we want from $\mathbf{V}$
+- $f(\mathbf{Q}, \mathbf{K})$ is high when $\mathbf{Q}$ is similar to $\mathbf{K}$
+
+<br>
+
+<div v-click>
+<Admonition title="Soft lookup" color="light" width="100%" icon="mdi-alpha-e-box">
+
+We want to find a textbook about NLP in the library ($\mathbf{V}$). We search for titles ($\mathbf{K}$) with "jurafsky" and "martin" as authors ($\mathbf{Q}$). The computer returns books with similar titles ($f$)
+
+</Admonition>
+</div>
+
+</div>
+
+:: right ::
+
+<div v-after>
+<figure>
+  <img src="./figures/retrieval_example.png" width="300px">
+</figure>
+</div>
+
+---
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+hideInToc: true
+---
+:: title ::
+### Non-Transformer Examples
+
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+:: left ::
+
+- $f(\mathbf{Q}, \mathbf{K})$ is high when $\mathbf{Q}$ is similar to $\mathbf{K}$
+- The output of $f$ must a matrix of size <br> $\mathbf{A}\in(0,1)^{[T_{Q}\times T_{V}]}$
+
+<v-click at="1">
+<Admonition title="Nadaraya-Watson Kernel Regression" color="light" width="100%" icon="mdi-alpha-e-box">
+
+We have some sequence of values <br> $\mathcal{D}=[(1.36, 1.79), (3.40, -1.77) \ldots, (6.05, -2.17)]$
+
+We want to predict a new sample at $x=4.21$
+
+We compute the negative Euclidean distance of our new sample with all training samples ($f$). We normalize the outputs to lie between $(0,1)$
+
+We compute our predicted value as the mean of the seen values, weighted by the computed similarities
+
+</Admonition>
+</v-click>
+
+:: right ::
+
+<figure style="position: relative;top: -100px;left: 0;">
+  <img v-click="2" src="./figures/kernel_regression_weights_matrix.svg" style="position: relative;width: 400px;top: 0;left: 0;">
+</figure>
+
+<figure style="position: relative;top: -200px;left: 0;">
+  <img v-click="[1, 3]" src="./figures/kernel_regression.svg" style="position: relative;width: 400px;top: 0;left: 0;">
+  <img v-click="[3, 4]" src="./figures/kernel_regression_weights.svg" style="position: absolute;width: 400px;top: 0%;">
+  <img v-click="4" src="./figures/kernel_regression_prediction.svg" style="position: absolute;width: 400px;top: 0%;">
+</figure>
+
+---
+layout: two-cols-title
+columns: is-6
+align: l-lt-cb
+hideInToc: true
+---
+:: title ::
+### Non-Transformer Examples
+
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+:: left ::
+
+- The $\mathbf{Q}$ and $\mathbf{V}$ do not need to have the same sequence length
+- Attention output will always have sequence length $T_{Q}$
+
+<v-click at="1">
+<Admonition title="Bahdanau et al. Attention" color="light" width="100%" icon="mdi-alpha-e-box">
+
+In Neural Machine Translation (NMT) the encoder generates a representation of the input language
+
+The decoder needs to generate in a target language
+
+Token in input language != token in output language
+
+Solution: have each token in the target language ($\mathbf{Q}$) attend back to all input language tokens ($\mathbf{K}$, $\mathbf{V}$)
+
+</Admonition>
+
+```
+Bahdanau, Cho & Bengio (2014). Neural machine translation
+by jointly learning to align and translate.
+arXiv preprint arXiv:1409.0473.
+```
+
+</v-click>
+
+:: right ::
+
+<figure style="position: relative;top: -10px;left: 0;">
+  <img v-click="1" src="./figures/bahdanau_attention.png" style="position: relative;width: 400px;top: 0;left: 0;">
+</figure>
 
 ---
 layout: default
