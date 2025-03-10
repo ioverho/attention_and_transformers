@@ -20,6 +20,11 @@ colorSchema: light
 aspectRatio: "16/9"
 favicon: 'https://cdn.jsdelivr.net/gh/slidevjs/slidev/assets/favicon.png'
 
+# Default slide settigns
+defaults:
+  hideInToc: true
+  color: light
+
 # Cover layout options
 layout: intro
 hideInToc: true
@@ -34,8 +39,6 @@ color: dark
 
 ---
 layout: two-cols-title
-hideInToc: true
-color: light
 ---
 
 :: title ::
@@ -45,7 +48,7 @@ color: light
 :: left ::
 
 <figure style="display: flex; justify-content: center;height: 100%">
-  <img src="./figures/about_me.jpg" style="position: relative;overflow: hidden;border-radius: 100%;width: 75%;">
+  <img src="/about_me.jpg" style="position: relative;overflow: hidden;border-radius: 100%;width: 75%;">
 </figure>
 
 :: right ::
@@ -72,9 +75,6 @@ color: light
 
 ---
 layout: two-cols-title
-title: "Vaswani et al. - Paper"
-hideInToc: true
-color: light
 columns: is-6
 align: l-lt-lb
 ---
@@ -101,7 +101,7 @@ align: l-lt-lb
 - Number of citations is only accelerating
 
 <figure>
-  <img src="./figures/vaswani_et_al_citations_rate.svg">
+  <img src="/vaswani_et_al_citations_rate.svg">
 </figure>
 
 </v-click>
@@ -125,14 +125,11 @@ neural information processing systems, 30.
 ```
 
 <figure>
-  <img src="./figures/vaswani_paper.png">
+  <img src="/vaswani_paper.png">
 </figure>
 
 ---
 layout: two-cols-title
-title: "Vaswani et al. - Effect"
-hideInToc: true
-color: light
 columns: is-6
 align: l-lt-lt
 ---
@@ -166,7 +163,7 @@ align: l-lt-lt
 :: right ::
 
 <figure>
-  <img src="./figures/transformer_affected_areas.png" style="width:70%;display: block;margin-left: auto;margin-right: auto;">
+  <img src="/transformer_affected_areas.png" style="width:70%;display: block;margin-left: auto;margin-right: auto;">
 </figure>
 ```
 Islam, et al. (2023). A Comprehensive Survey on Applications of
@@ -176,7 +173,6 @@ Transformers for Deep Learning Tasks. arXiv:2306.07303.
 ---
 layout: side-title
 color: dark
-hideInToc: true
 side: l
 titlewidth: is-4
 align: rm-mt
@@ -189,13 +185,11 @@ align: rm-mt
 :: content ::
 
 <figure>
-  <img src="./figures/transformer_svg.svg">
+  <img src="/transformer_svg.svg">
 </figure>
 
 ---
-hideInToc: true
 layout: two-cols-title
-color: light
 columns: is-6
 align: l-lt-lt
 ---
@@ -249,15 +243,13 @@ align: l-lt-lt
 :: right ::
 
 <figure>
-  <img src="./figures/transformer_all_chapters.svg" style="width:100%;display: block;margin-left: auto;margin-right: auto;">
+  <img src="/transformer_all_chapters.svg" style="width:100%;display: block;margin-left: auto;margin-right: auto;">
 </figure>
 
 ---
 layout: two-cols-title
-color: light
 columns: is-6
 align: l-lt-lt
-hideInToc: true
 ---
 
 :: title ::
@@ -301,13 +293,11 @@ hideInToc: true
 :: right ::
 
 <figure>
-  <img src="./figures/transformer_all_chapters.svg" style="width:100%;display: block;margin-left: auto;margin-right: auto;">
+  <img src="/transformer_all_chapters.svg" style="width:100%;display: block;margin-left: auto;margin-right: auto;">
 </figure>
 
 ---
 layout: two-cols-title
-hideInToc: true
-color: light
 columns: is-6
 align: l-lt-lt
 ---
@@ -323,10 +313,11 @@ align: l-lt-lt
 :: right ::
 
 <figure>
-  <img src="./figures/transformer_svg.svg" style="width:100%;display: block;margin-left: auto;margin-right: auto;">
+  <img src="/transformer_svg.svg" style="width:100%;display: block;margin-left: auto;margin-right: auto;">
 </figure>
 
 ---
+hideInToc: false
 layout: section
 color: dark
 ---
@@ -336,24 +327,10 @@ color: dark
 Text comes in, text goes out
 
 ---
-title: "The Transformer - GIF"
-hideInToc: true
-layout: full
-color: white
----
-
-<a href="https://3.bp.blogspot.com/-aZ3zvPiCoXM/WaiKQO7KRnI/AAAAAAAAB_8/7a1CYjp40nUg4lKpW7covGZJQAySxlg8QCLcBGAs/s640/transform20fps.gif">
-<img src="https://3.bp.blogspot.com/-aZ3zvPiCoXM/WaiKQO7KRnI/AAAAAAAAB_8/7a1CYjp40nUg4lKpW7covGZJQAySxlg8QCLcBGAs/s640/transform20fps.gif" style="width:55%;display: block;margin-left: auto;margin-right: auto;" alt="GIF of the transformer in action">
-</a>
-```
-Jakob Uszkoreit (August 31, 2017). Transformer: A Novel Neural Network Architecture for Language  Understanding.
-https://research.google/blog/transformer-a-novel-neural-network-architecture-for-language-understanding/
-```
-
----
 title: "Attention Blocks"
-color: dark
+hideInToc: false
 layout: section
+color: dark
 columns: is-6
 align: l-lt-lt
 ---
@@ -363,9 +340,9 @@ align: l-lt-lt
 What makes the Transformer what it is --- and where it came from
 
 ---
+hideInToc: false
 layout: side-title
 color: dark
-hideInToc: true
 side: l
 titlewidth: is-5
 align: lm-mt
@@ -378,10 +355,11 @@ align: lm-mt
 :: content ::
 
 <figure>
-  <img src="./figures/transformer_svg.svg" style="width:100%;display: block;margin-left: auto;margin-right: auto;">
+  <img src="/transformer_svg.svg" style="width:100%;display: block;margin-left: auto;margin-right: auto;">
 </figure>
 
 ---
+hideInToc: false
 layout: two-cols-title
 columns: is-6
 align: l-lt-lt
@@ -394,15 +372,15 @@ align: l-lt-lt
 :: left ::
 
 - Let $\mathbf{V}$ be a matrix of (word) vectors
-  - It has a sequence length of $T_{V}$
-  - It has a dimensionality of $D$
+  - It has a sequence length of $t_{V}$
+  - It has a dimensionality of $d_{V}$
 
 <br>
 
 <v-click>
 
 - $\mathtt{Attention}$ is just a matrix product of $\mathbf{V}$ with an attention matrix $\mathbf{A}$
-  - $\mathbf{A}$ is a square matrix of size $T_{V}\times T_{V}$
+  - $\mathbf{A}$ is a square matrix of size $t_{V}\times t_{V}$
   - It's elements are all between $(0, 1)$
   - It's rows sum to $1$
 
@@ -413,8 +391,8 @@ align: l-lt-lt
 $${3|all}
 \begin{align*}
   &\mathtt{Attention}(?, ?, \mathbf{V})=\mathbf{A}\mathbf{V} \\
-  &\quad\mathbf{A}\in(0,1)^{[T_{V}\times T_{V}]} \\
-  &\quad\mathbf{V}\in\mathbb{R}^{[T_{V}\times D]}
+  &\quad\mathbf{A}\in(0,1)^{[t_{V}\times t_{V}]} \\
+  &\quad\mathbf{V}\in\mathbb{R}^{[t_{V}\times d_{V}]}
 \end{align*}
 $$
 
@@ -422,8 +400,8 @@ $$
 layout: two-cols-title
 columns: is-6
 align: l-lt-ct
-hideInToc: true
 ---
+
 :: title ::
 ### Definition & Properties
 
@@ -471,15 +449,14 @@ $$
 :: right ::
 
 <figure style="position: relative;top: 0;left: 0;">
-    <img v-after.hide src="./figures/word_vectors.svg" style="position: relative;width: 400px;top: 0;left: 0;">
-    <img v-after src="./figures/adjusted_word_vectors.svg" style="position: absolute;width: 400px;top: 0%;">
+    <img v-after.hide src="/word_vectors.svg" style="position: relative;width: 400px;top: 0;left: 0;">
+    <img v-after src="/adjusted_word_vectors.svg" style="position: absolute;width: 400px;top: 0%;">
 </figure>
 
 ---
 layout: two-cols-title
 columns: is-6
 align: l-lt-ct
-hideInToc: true
 ---
 :: title ::
 ### Definition & Properties
@@ -499,27 +476,26 @@ The elements of $V^\prime$ will lie inside the convex hull of all of the element
 <v-click>
 <Admonition title="Permutation Equivariance" color="light" width="100%" icon="mdi-pencil">
 
-The elements of $V^\prime$ are *equivariant* to a change in the order of the rows of $\mathbf{A}$
+The elements of $\mathbf{V}^\prime$ are *equivariant* to a change in the order of the columns of $\mathbf{A}$ and the rows of $\mathbf{V}$
 
 </Admonition>
 
 - Attention does not care about word order
+  - 'I am Sam' ~ 'Sam I am'
 
 </v-click>
 
 :: right ::
 
 <figure style="position: relative;top: 0;left: 0;">
-    <img v-after.hide src="./figures/attention_as_convex_combination.svg" style="position: relative;width: 400px;top: 0;left: 0;">
-    <img v-after src="./figures/attention_permutation_equivariant.drawio.svg" style="position: absolute;width: 400px;top: 0%;">
+    <img v-after.hide src="/attention_as_convex_combination.svg" style="position: relative;width: 400px;top: 0;left: 0;">
+    <img v-after src="/attention_permutation_equivariant.drawio.svg" style="position: absolute;width: 400px;top: 0%;">
 </figure>
 
 ---
 layout: default
-columns: is-6
-align: l-lt-ct
-hideInToc: true
 ---
+
 ### Definition & Properties
 
 ##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
@@ -547,7 +523,6 @@ Linear maps are:
 layout: two-cols-title
 columns: is-6
 align: l-lt-lt
-hideInToc: true
 ---
 :: title ::
 ### Definition & Properties
@@ -560,15 +535,15 @@ hideInToc: true
 
 - Let $\mathbf{V}$ be a matrix of **value** vectors
   - It has a sequence length of $T_{V}$
-  - It has a dimensionality of $D_{V}$
+  - It has a dimensionality of $d_{V}$
 
 - Let $\mathbf{K}$ be a matrix of **key** vectors
-  - It has a sequence length of $T_{V}$
-  - It has a dimensionality of $D_{Q}$
+  - It has a sequence length of $t_{V}$
+  - It has a dimensionality of $d_{K}$
 
 - Let $\mathbf{Q}$ be a matrix of **query** vectors
-  - It has a sequence length of $T_{Q}$
-  - It has a dimensionality of $D_{Q}$
+  - It has a sequence length of $t_{Q}$
+  - It has a dimensionality of $d_{K}$
 
 <div v-click>
 
@@ -584,18 +559,18 @@ hideInToc: true
 $${3,4,5|all}
 \begin{align*}
 &\mathtt{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V})=\underbrace{\mathtt{softmax}\left(f\left(\mathbf{Q}, \mathbf{K}\right)\right)}_{\mathbf{A}}\mathbf{V} \\
-&\quad\mathbf{A}\in(0,1)^{[T_{Q}\times T_{V}]} \\
-&\quad\mathbf{V}\in\mathbb{R}^{[T_{V}\times D_{V}]} \\
-&\quad\mathbf{K}\in\mathbb{R}^{[T_{V}\times D_{Q}]} \\
-&\quad\mathbf{Q}\in\mathbb{R}^{[T_{Q}\times D_{Q}]} \\
+&\quad\mathbf{A}\in(0,1)^{[t_{Q}\times t_{V}]} \\
+&\quad\mathbf{V}\in\mathbb{R}^{[t_{V}\times d_{v}]} \\
+&\quad\mathbf{K}\in\mathbb{R}^{[t_{V}\times d_{k}]} \\
+&\quad\mathbf{Q}\in\mathbb{R}^{[t_{Q}\times d_{k}]} \\
 \end{align*}
 $$
 
 ---
+hideInToc: false
 layout: two-cols-title
 columns: is-6
 align: l-lt-cm
-hideInToc: false
 ---
 :: title ::
 ### Non-Transformer Examples
@@ -627,7 +602,7 @@ We want to find a textbook about NLP in the library ($\mathbf{V}$). We search fo
 
 <div v-after>
 <figure>
-  <img src="./figures/retrieval_example.png" width="300px">
+  <img src="/retrieval_example.png" width="300px">
 </figure>
 </div>
 
@@ -635,7 +610,6 @@ We want to find a textbook about NLP in the library ($\mathbf{V}$). We search fo
 layout: two-cols-title
 columns: is-6
 align: l-lt-ct
-hideInToc: true
 ---
 :: title ::
 ### Non-Transformer Examples
@@ -652,7 +626,7 @@ hideInToc: true
 
 We have some sequence of values <br> $\mathcal{D}=[(1.36, 1.79), (3.40, -1.77) \ldots, (6.05, -2.17)]$
 
-We want to predict a new sample at $x=4.21$
+We want to predict a new sample at $x=4.25$
 
 We compute the negative Euclidean distance of our new sample with all training samples ($f$). We normalize the outputs to lie between $(0,1)$
 
@@ -664,20 +638,19 @@ We compute our predicted value as the mean of the seen values, weighted by the c
 :: right ::
 
 <figure style="position: relative;top: -100px;left: 0;">
-  <img v-click="2" src="./figures/kernel_regression_weights_matrix.svg" style="position: relative;width: 400px;top: 0;left: 0;">
+  <img v-click="2" src="/kernel_regression_weights_matrix.svg" style="position: relative;width: 400px;top: 0;left: 0;">
 </figure>
 
 <figure style="position: relative;top: -200px;left: 0;">
-  <img v-click="[1, 3]" src="./figures/kernel_regression.svg" style="position: relative;width: 400px;top: 0;left: 0;">
-  <img v-click="[3, 4]" src="./figures/kernel_regression_weights.svg" style="position: absolute;width: 400px;top: 0%;">
-  <img v-click="4" src="./figures/kernel_regression_prediction.svg" style="position: absolute;width: 400px;top: 0%;">
+  <img v-click="[1, 3]" src="/kernel_regression.svg" style="position: relative;width: 400px;top: 0;left: 0;">
+  <img v-click="[3, 4]" src="/kernel_regression_weights.svg" style="position: absolute;width: 400px;top: 0%;">
+  <img v-click="4" src="/kernel_regression_prediction.svg" style="position: absolute;width: 400px;top: 0%;">
 </figure>
 
 ---
 layout: two-cols-title
 columns: is-6
 align: l-lt-cb
-hideInToc: true
 ---
 :: title ::
 ### Non-Transformer Examples
@@ -713,28 +686,457 @@ arXiv preprint arXiv:1409.0473.
 :: right ::
 
 <figure style="position: relative;top: -10px;left: 0;">
-  <img v-click="1" src="./figures/bahdanau_attention.png" style="position: relative;width: 400px;top: 0;left: 0;">
+  <img v-click="1" src="/bahdanau_attention.png" style="position: relative;width: 400px;top: 0;left: 0;">
 </figure>
 
 ---
-layout: default
-color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-c
+hide: true
 ---
+
+:: title ::
+### Non-Transformer Examples
+
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+:: left ::
+
+- The attention matrix can be interpreted as a weighted adjacency matrix in a fully-connected graph where tokens are nodes
+
+<v-click at="1">
+<Admonition title="Graph Attention" color="light" width="100%" icon="mdi-alpha-e-box">
+
+We need to compute a represenation for node $\mathbf{h}_{i}$.
+
+We get all representations for $\mathbf{h}_{j}\in \mathcal{N}(h_{i})\cup h_{i}$ ($\mathbf{K}$), and compare these to $\mathbf{h}_{i}$ ($\mathbf{Q}$).
+
+We then compute the representation of $h_{i}$ from the attention weighted average of all nodes in $\mathbf{h}_{j}\in \mathcal{N}(h_{i})\cup h_{i}$.
+
+</Admonition>
+
+</v-click>
+
+:: right ::
+
+<figure style="position: relative;">
+  <img v-click="1" src="/gat.png" style="position: relative;">
+</figure>
+
+<v-click at="1">
+```
+Bahdanau, Cho & Bengio (2014). Neural machine translation
+by jointly learning to align and translate.
+arXiv preprint arXiv:1409.0473.
+```
+</v-click>
+
+---
+hideInToc: false
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+
+:: title ::
 
 ### Attention in Transformers
 ##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
 
+:: left ::
+
+- Transformer attention uses a scaled dot-product kernel function
+
+  $$f(\mathbf{Q}, \mathbf{K})=\dfrac{\mathbf{Q}\mathbf{K}^{\intercal}}{\sqrt{d_{k}}}$$
+
+- $\mathbf{Q}$ is of size $t_{Q}\times d_{K}$
+- $\mathbf{K}$ is of size $t_{V}\times d_{K}$
+- Attention matrix is thus of size $t_{Q}\times t_{V}$
+
+:: right ::
+
+$$\mathtt{attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V})=\mathtt{softmax}\left(f(\mathbf{Q}, \mathbf{K})\right)\mathbf{V}$$
+
+<figure>
+  <img src="/sdpa_self.drawio.svg" style="width: 350px;">
+</figure>
+
 ---
-layout: default
-color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
 ---
+
+:: title ::
+
+### Attention in Transformers
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+:: left ::
+
+- Transformer attention uses a scaled dot-product kernel function
+
+  $$f(\mathbf{Q}, \mathbf{K})=\dfrac{\mathbf{Q}\mathbf{K}^{\intercal}}{\sqrt{d_{k}}}$$
+
+- Why scale?
+  - Assume the elements in $\mathbf{Q}$ and $\mathbf{K}$ come from *independent* normal distributions:
+  $$\mathbf{q}, \mathbf{k}\sim\mathcal{N}(0, 1)$$
+  - The [distribution of their dot-product](https://en.wikipedia.org/wiki/Distribution_of_the_product_of_two_random_variables#Independent_central-normal_distributions) is:
+  $$\mathbf{q}^{\intercal}\mathbf{k}\sim\mathcal{N}(0, \sqrt{d_{k}})$$
+:: right ::
+
+$$
+\begin{aligned}
+\mathtt{var}\left[\mathbf{q}^{\intercal}\mathbf{k}\right]&=\mathtt{var}\left[\sum_{i}^{d_{k}}q_{i}k_{i}\right] \\
+&=\sum_{i}^{d_{k}}\mathtt{var}\left[q_{i}k_{i}\right] \\
+&=\sum_{i}^{d_{k}}\mathtt{var}\left[q_{i}\right]\mathtt{var}\left[k_{i}\right] \\
+&=\sum_{i}^{d_{k}} 1\cdot 1 \\
+&= d_{k}
+\end{aligned}
+$$
+
+---
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+
+:: title ::
+
+### Attention in Transformers
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+:: left ::
+
+- Why mask?
+  - Currently all tokens are treated equally
+  - **Causal masking**: decoder tokens should never attend to future tokens, only to the past
+  - **Local masking**: sometimes local attention is all you need
+
+
+:: right ::
+
+<figure>
+  <img src="/causal_masking.png" style="width: 100%;">
+  <caption><nobr><a href="https://krypticmouse.hashnode.dev/attention-is-all-you-need" style="font-size: 9pt;">https://krypticmouse.hashnode.dev/attention-is-all-you-need</a></nobr></caption>
+  <img src="/efficient_masking.png" style="width: 100%;">
+  <caption><nobr><a href="https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/" style="font-size: 9pt;">https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/</a></nobr></caption>
+</figure>
+
+---
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+
+:: title ::
+
+### Attention in Transformers
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+:: left ::
+
+- Where do $\mathbf{V}$, $\mathbf{K}$, $\mathbf{Q}$ come from?
+
+:: right ::
+
+<figure>
+  <img src="/sdpa_self.drawio.svg" style="width: 350px;">
+</figure>
+
+
+---
+layout: two-cols-title
+columns: is-6
+align: l-ct-ct
+---
+
+:: title ::
+
+### Attention in Transformers
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+:: left ::
+
+**Self-attention**
+
+<figure>
+  <img src="/sdpa_self.drawio.svg" style="width: 350px;">
+</figure>
+
+:: right ::
+
+**Cross-attention**
+
+<figure>
+  <img src="/sdpa_cross.drawio.svg" style="width: 350px;">
+</figure>
+
+---
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+
+:: title ::
+
+### Attention in Transformers
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+:: left ::
+
+- Where do $\mathbf{V}$, $\mathbf{K}$, $\mathbf{Q}$ come from?
+  - **Self-attention**: everything comes from the same sequence
+  - **Cross-attention**: $\mathbf{V}$, $\mathbf{K}$ come from source sequence, $\mathbf{Q}$ comes from target sequence
+  - All components constructed from a projection of the token embeddings
+    1. $\mathbf{V}=\mathbf{X}\mathbf{W}_{V}$
+    2. $\mathbf{K}=\mathbf{X}\mathbf{W}_{K}$
+    3. $\underbrace{\mathbf{Q}=\mathbf{X}\mathbf{W}_{Q}}_{\text{Self-attention}}$ or $\underbrace{\mathbf{Q}=\mathbf{Y}\mathbf{W}_{Q}}_{\text{Cross-attention}}$
+
+:: right ::
+
+<figure>
+  <img src="/transformer_svg.svg">
+</figure>
+
+---
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+
+:: title ::
+
+### Attention in Transformers
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+:: left ::
+
+- Even in self-attention, attention matrix is **not** symmetric
+  $$
+  \begin{aligned}
+  \dfrac{\mathbf{Q}\mathbf{K}^ {\intercal}}{\sqrt{d_{k}}}&=\dfrac{\mathbf{X}\mathbf{W}_{Q}(\mathbf{X}\mathbf{W}_{K})^{\intercal}}{\sqrt{d_{k}}} \\
+  &=\dfrac{\mathbf{X}\mathbf{W}_{Q}\mathbf{W}^{\intercal}_{K}\mathbf{X}^{\intercal}}{\sqrt{d_{k}}}
+  \end{aligned}
+  $$
+
+<br>
+
+<Admonition title="Asymmetry" color="light" width="100%" icon="mdi-pencil">
+
+The contribution of token $\mathbf{x}_{i}$ to $\mathbf{x}_{j}$, is **not** the same as the contribution of tokn $\mathbf{x}_{j}$ to $\mathbf{x}_{i}$
+
+</Admonition>
+
+:: right ::
+
+<figure>
+  <img src="/sdpa_self.drawio.svg" style="width: 350px;">
+</figure>
+
+---
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+
+:: title ::
+
+### Attention in Transformers
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+:: left ::
+
+- Transformer attention between two sequences, $\mathbf{X}$ and $\mathbf{Y}$ has a computational cost of (excluding projections):
+  $$\mathcal{O}\left(\underbrace{t_{x}\cdot t_{y}\cdot d_{k}}_{\text{MatMul 1}}+\underbrace{t_{x}\cdot t_{y}\cdot d_{v}}_{\text{MatMul 2}}\right)$$
+
+- But RNNs have linear time complexity...
+  $$\mathcal{O}\left(t_{x}\cdot d_{k}^2 + t_{x}\cdot d_{q}^2\right)$$
+
+- RNNs are serial, Attention is parallel
+  - GPUs *looove* parallelism
+
+:: right ::
+
+<figure>
+  <img src="/sdpa_self.drawio.svg" style="width: 350px;">
+</figure>
+
+---
+layout: full
+color: white
+---
+
+<a href="https://3.bp.blogspot.com/-aZ3zvPiCoXM/WaiKQO7KRnI/AAAAAAAAB_8/7a1CYjp40nUg4lKpW7covGZJQAySxlg8QCLcBGAs/s640/transform20fps.gif">
+<img src="/transformer_flow_of_information.gif" style="width:55%;display: block;margin-left: auto;margin-right: auto;" alt="GIF of the transformer in action">
+</a>
+```
+Jakob Uszkoreit (August 31, 2017). Transformer: A Novel Neural Network Architecture for Language  Understanding.
+https://research.google/blog/transformer-a-novel-neural-network-architecture-for-language-understanding/
+```
+
+---
+hideInToc: false
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+:: title::
 
 ### Multi-head Attention
 ##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
 
+:: left ::
+
+- Currently we use 1 set of attention weights
+  - Can only process 1 query type
+
+<v-click at="1">
+
+- With $h$ attention heads, we learn $h$ concepts
+  - To reduce cost, reduce dimensionality $d_{K, V}/h$
+
+</v-click>
+
+<v-click at="2">
+
+```python
+self.attention_heads = [
+  AttentionHead(d=self.d // self.h) for i in range(self.h)
+  ]
+
+self.mha_proj = nn.Linear(self.d, self.d)
+
+mha = torch.concat([
+  attention_heads[i](x) for i in range(self.h)
+  ])
+
+out = self.mha_proj(mha)
+```
+</v-click>
+
+:: right ::
+
+<figure v-click=1>
+  <img src="/multihead_attention.drawio.svg" style="width: 100%;">
+</figure>
+
+---
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+:: title::
+
+### Multi-head Attention
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+:: left ::
+
+> Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions. [One] attention head, averaging inhibits this.
+
+```
+Vaswani et al. (2017). Attention is all you need. Advances
+in neural information processing systems, 30. (p. 5 & 15)
+```
+
+<br>
+
+<v-click at="1">
+
+<div class="ns-c-tight">
+
+Multiple heads, multiple different queries processed in parallel
+- Positional heads
+- Syntactic heads
+- Rare words?
+
+</div>
+
+```
+Voita et al. (2019). Analyzing Multi-Head Self-Attention:
+Specialized Heads Do the Heavy Lifting, the Rest Can
+Be Pruned. Association for Computational Linguistics.
+```
+
+</v-click>
+
+:: right ::
+<div class="grid w-full h-md grid-cols-2 m-t-0">
+  <div class="grid-item grid-col-span-1"><img class="h-full" style="margin: 0 auto;" src="/attending_to_head_new.svg"></div>
+  <div class="grid-item grid-col-span-1"><img class="h-full" style="margin: 0 auto;" src="/attending_to_head2_new.svg"></div>
+</div>
+
+---
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+:: title::
+
+### Multi-head Attention
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+:: left ::
+
+Do different heads attend to different concepts?
+
+<div class="ns-c-tight">
+  <v-click at="1">
+
+  - Individual heads = high rank, concantenated heads = low rank
+    ```
+    Cordonnier, Loukas & Jaggi (2020). Multi-head attention:
+    Collaborate instead of concatenate. arXiv:2006.16362.
+    ```
+
+  </v-click>
+
+  <br>
+
+  <v-click at="2">
+
+  - Most heads can be pruned away
+  - Enc-Dec heads are more important than Enc-Enc heads
+    ```
+    Voita et al. (2019). Analyzing Multi-Head Self-Attention:
+    Specialized Heads Do the Heavy Lifting, the Rest Can
+    Be Pruned. Association for Computational Linguistics.
+    ```
+
+  </v-click>
+</div>
+
+:: right ::
+
+<div class="grid w-full h-full grid-cols-2">
+  <div class="grid-item grid-col-span-1 mt-10" v-click="1"><img class="h-full" style="margin: 0 auto;" src="/captured_variance_base_by_head_cropped.svg"></div>
+  <div class="grid-item grid-col-span-1 mt-10" v-click="1"><img class="h-full" style="margin: 0 auto;" src="/captured_variance_base_cropped.svg"></div>
+  <div class="grid-item grid-col-span-2 mt-7" v-click="2"><img style="margin: 0 auto;" src="/heads_dying_by_attn_type_both-min.png"></div>
+</div>
+
+---
+hideInToc: false
+layout: side-title
+color: dark
+side: l
+titlewidth: is-5
+align: lm-mt
+---
+
+:: title::
+
+## <span class="bg-lime-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Add & Norm</span>
+
+:: content ::
+
+<figure>
+  <img src="/transformer_svg.svg" style="width:100%;display: block;margin-left: auto;margin-right: auto;">
+</figure>
+
 ---
 layout: default
-color: light
 ---
 
 ## <span class="bg-lime-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Add & Norm</span>
@@ -742,7 +1144,6 @@ color: light
 
 ---
 layout: default
-color: light
 ---
 
 ### Residual Connections
@@ -750,7 +1151,6 @@ color: light
 
 ---
 layout: two-cols-title
-color: light
 columns: is-6
 align: l-lt-lt
 ---
@@ -776,7 +1176,6 @@ $$
 
 ---
 layout: default
-color: light
 ---
 
 ## <span class="bg-blue-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Feed Forward</span>
@@ -793,7 +1192,6 @@ align: l-lt-lt
 
 ---
 layout: default
-color: light
 ---
 
 ## <span class="bg-green-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Position Encoding</span>
