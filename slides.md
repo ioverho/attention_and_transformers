@@ -301,7 +301,9 @@ layout: two-cols-title
 columns: is-6
 align: l-lt-lt
 ---
+
 :: title ::
+
 # Table of Contents
 
 :: left ::
@@ -364,7 +366,9 @@ layout: two-cols-title
 columns: is-6
 align: l-lt-lt
 ---
+
 :: title ::
+
 ### Definition & Properties
 
 ##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
@@ -403,6 +407,7 @@ align: l-lt-ct
 ---
 
 :: title ::
+
 ### Definition & Properties
 
 ##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
@@ -458,7 +463,9 @@ layout: two-cols-title
 columns: is-6
 align: l-lt-ct
 ---
+
 :: title ::
+
 ### Definition & Properties
 
 ##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
@@ -489,7 +496,7 @@ The elements of $\mathbf{V}^\prime$ are *equivariant* to a change in the order o
 
 <figure style="position: relative;top: 0;left: 0;">
     <img v-after.hide src="/attention_as_convex_combination.svg" style="position: relative;width: 400px;top: 0;left: 0;">
-    <img v-after src="/attention_permutation_equivariant.drawio.svg" style="position: absolute;width: 400px;top: 0%;">
+    <img v-after src="/attention_permutation_equivariant.drawio.svg" style="position: absolute;width: 450px;top: 0;left: 0;">
 </figure>
 
 ---
@@ -524,7 +531,9 @@ layout: two-cols-title
 columns: is-6
 align: l-lt-lt
 ---
+
 :: title ::
+
 ### Definition & Properties
 
 ##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
@@ -572,7 +581,9 @@ layout: two-cols-title
 columns: is-6
 align: l-lt-cm
 ---
+
 :: title ::
+
 ### Non-Transformer Examples
 
 ##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
@@ -611,7 +622,9 @@ layout: two-cols-title
 columns: is-6
 align: l-lt-ct
 ---
+
 :: title ::
+
 ### Non-Transformer Examples
 
 ##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
@@ -637,22 +650,26 @@ We compute our predicted value as the mean of the seen values, weighted by the c
 
 :: right ::
 
-<figure style="position: relative;top: -100px;left: 0;">
-  <img v-click="2" src="/kernel_regression_weights_matrix.svg" style="position: relative;width: 400px;top: 0;left: 0;">
-</figure>
+<div>
+  <figure>
+    <img v-click="2" src="/kernel_regression_weights_matrix.svg">
+  </figure>
 
-<figure style="position: relative;top: -200px;left: 0;">
-  <img v-click="[1, 3]" src="/kernel_regression.svg" style="position: relative;width: 400px;top: 0;left: 0;">
-  <img v-click="[3, 4]" src="/kernel_regression_weights.svg" style="position: absolute;width: 400px;top: 0%;">
-  <img v-click="4" src="/kernel_regression_prediction.svg" style="position: absolute;width: 400px;top: 0%;">
-</figure>
+  <figure style="position: relative;top: 0px;left: 0;">
+    <img v-click="[1, 3]" style="position: absolute;top: 0px;left: 0;" src="/kernel_regression.svg">
+    <img v-click="[3, 4]" style="position: absolute;top: 0px;left: 0;" src="/kernel_regression_weights.svg">
+    <img v-click="4" style="position: absolute;top: 0px;left: 0;" src="/kernel_regression_prediction.svg">
+  </figure>
+</div>
 
 ---
 layout: two-cols-title
 columns: is-6
-align: l-lt-cb
+align: l-lt-ct
 ---
+
 :: title ::
+
 ### Non-Transformer Examples
 
 ##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
@@ -663,6 +680,7 @@ align: l-lt-cb
 - Attention output will always have sequence length $T_{Q}$
 
 <v-click at="1">
+
 <Admonition title="Bahdanau et al. Attention" color="light" width="100%" icon="mdi-alpha-e-box">
 
 In Neural Machine Translation (NMT) the encoder generates a representation of the input language
@@ -680,14 +698,15 @@ Bahdanau, Cho & Bengio (2014). Neural machine translation
 by jointly learning to align and translate.
 arXiv preprint arXiv:1409.0473.
 ```
-
 </v-click>
 
 :: right ::
 
-<figure style="position: relative;top: -10px;left: 0;">
-  <img v-click="1" src="/bahdanau_attention.png" style="position: relative;width: 400px;top: 0;left: 0;">
-</figure>
+<v-click at="1">
+  <figure style="position: relative;">
+    <img src="/bahdanau_attention.png" style="width: 350px">
+  </figure>
+</v-click>
 
 ---
 layout: two-cols-title
@@ -697,6 +716,7 @@ hide: true
 ---
 
 :: title ::
+
 ### Non-Transformer Examples
 
 ##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
@@ -720,11 +740,12 @@ We then compute the representation of $h_{i}$ from the attention weighted averag
 
 :: right ::
 
-<figure style="position: relative;">
-  <img v-click="1" src="/gat.png" style="position: relative;">
+<v-click at="1">
+
+<figure>
+  <img src="/gat.png">
 </figure>
 
-<v-click at="1">
 ```
 Bahdanau, Cho & Bengio (2014). Neural machine translation
 by jointly learning to align and translate.
@@ -819,9 +840,9 @@ align: l-lt-ct
 
 <figure>
   <img src="/causal_masking.png" style="width: 100%;">
-  <caption><nobr><a href="https://krypticmouse.hashnode.dev/attention-is-all-you-need" style="font-size: 9pt;">https://krypticmouse.hashnode.dev/attention-is-all-you-need</a></nobr></caption>
+  <nobr><a href="https://krypticmouse.hashnode.dev/attention-is-all-you-need" style="font-size: 9pt;">https://krypticmouse.hashnode.dev/attention-is-all-you-need</a></nobr>
   <img src="/efficient_masking.png" style="width: 100%;">
-  <caption><nobr><a href="https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/" style="font-size: 9pt;">https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/</a></nobr></caption>
+  <nobr><a href="https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/" style="font-size: 9pt;">https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/</a></nobr>
 </figure>
 
 ---
@@ -1064,8 +1085,8 @@ Be Pruned. Association for Computational Linguistics.
 
 :: right ::
 <div class="grid w-full h-md grid-cols-2 m-t-0">
-  <div class="grid-item grid-col-span-1"><img class="h-full" style="margin: 0 auto;" src="/attending_to_head_new.svg"></div>
-  <div class="grid-item grid-col-span-1"><img class="h-full" style="margin: 0 auto;" src="/attending_to_head2_new.svg"></div>
+  <div class="grid-item grid-col-span-1"><img style="margin: 0 auto;" src="/attending_to_head_new.svg"></div>
+  <div class="grid-item grid-col-span-1"><img style="margin: 0 auto;" src="/attending_to_head2_new.svg"></div>
 </div>
 
 ---
