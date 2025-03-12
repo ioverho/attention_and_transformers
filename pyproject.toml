@@ -1,0 +1,11 @@
+[project]
+name = "attention-and-transformers-2"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "jax>=0.5.2",
+    "matplotlib>=3.10.1",
+    "numpy>=2.2.3",
+    "pip>=25.0.1",
+    "seaborn>=0.13.2",
+]
