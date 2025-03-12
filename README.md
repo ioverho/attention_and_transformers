@@ -24,3 +24,17 @@ attention_and_transformers/
 │   └── *.png/pdf
 └── README.md
 ```
+
+## Installation
+
+First activate the right `node.js` version
+
+```bash
+nvm use node
+```
+
+Then make sure `slidev` is installed:
+
+```bash
+pnpm i -g @slidev/cli
+```
