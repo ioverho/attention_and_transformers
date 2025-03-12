@@ -1,5 +1,5 @@
 {
-  "name": "attention_and_transformers_2",
+  "name": "attention_and_transformers",
   "type": "module",
   "private": true,
   "scripts": {
@@ -11,7 +11,6 @@
     "@slidev/cli": "^51.3.0",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
-    "slidev-theme-academic": "^2.1.0",
     "slidev-theme-neversink": "^0.3.6",
     "vue": "^3.5.13"
   },
