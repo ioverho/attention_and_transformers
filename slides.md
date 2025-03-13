@@ -381,7 +381,7 @@ align: l-lt-lt
 
 <br>
 
-<v-click>
+<v-click at="1">
 
 - $\mathtt{Attention}$ is just a matrix product of $\mathbf{V}$ with an attention matrix $\mathbf{A}$
   - $\mathbf{A}$ is a square matrix of size $t_{V}\times t_{V}$
@@ -543,7 +543,7 @@ align: l-lt-lt
 <div class="ns-c-tight">
 
 - Let $\mathbf{V}$ be a matrix of **value** vectors
-  - It has a sequence length of $T_{V}$
+  - It has a sequence length of $t_{V}$
   - It has a dimensionality of $d_{V}$
 
 - Let $\mathbf{K}$ be a matrix of **key** vectors
@@ -593,7 +593,7 @@ align: l-lt-cm
 <div class="ns-c-tight">
 
 - $\mathbf{V}$ contains information
-- $\mathbf{K}$ contains information about information (i.e, metadata)
+- $\mathbf{K}$ contains information about information (i.e., metadata)
 - $\mathbf{Q}$ contains metadata about what we want from $\mathbf{V}$
 - $f(\mathbf{Q}, \mathbf{K})$ is high when $\mathbf{Q}$ is similar to $\mathbf{K}$
 
@@ -631,8 +631,8 @@ align: l-lt-ct
 
 :: left ::
 
-- $f(\mathbf{Q}, \mathbf{K})$ is high when $\mathbf{Q}$ is similar to $\mathbf{K}$
-- The output of $f$ must a matrix of size <br> $\mathbf{A}\in(0,1)^{[T_{Q}\times T_{V}]}$
+- $\mathbf{Q}$ and $\mathbf{V}$ do not need to have the same sequence length
+- The output of $f$ is *always* a matrix of size <br> $\mathbf{A}\in(0,1)^{[t_{Q}\times t_{V}]}$
 
 <v-click at="1">
 <Admonition title="Nadaraya-Watson Kernel Regression" color="light" width="100%" icon="mdi-alpha-e-box">
@@ -676,12 +676,12 @@ align: l-lt-ct
 
 :: left ::
 
-- The $\mathbf{Q}$ and $\mathbf{V}$ do not need to have the same sequence length
-- Attention output will always have sequence length $T_{Q}$
+- $f(\mathbf{Q}, \mathbf{K})$ is high when $q_{i}$ is similar to $k_{j}$
+- Attention matrix tells us how important $v_{j}$ is to $q_{i}$
 
 <v-click at="1">
 
-<Admonition title="Bahdanau et al. Attention" color="light" width="100%" icon="mdi-alpha-e-box">
+<Admonition title="Bahdanau et al. Alignment" color="light" width="100%" icon="mdi-alpha-e-box">
 
 In Neural Machine Translation (NMT) the encoder generates a representation of the input language
 
@@ -711,7 +711,7 @@ arXiv preprint arXiv:1409.0473.
 ---
 layout: two-cols-title
 columns: is-6
-align: l-lt-c
+align: l-lt-lt
 hide: true
 ---
 
@@ -723,7 +723,8 @@ hide: true
 
 :: left ::
 
-- The attention matrix can be interpreted as a weighted adjacency matrix in a fully-connected graph where tokens are nodes
+- Attention is permutation equivariant has no sense of word order
+- Attention treats tokens as a fully-connected graph
 
 <v-click at="1">
 <Admonition title="Graph Attention" color="light" width="100%" icon="mdi-alpha-e-box">
@@ -742,15 +743,36 @@ We then compute the representation of $h_{i}$ from the attention weighted averag
 
 <v-click at="1">
 
-<figure>
-  <img src="/gat.png">
-</figure>
+<img src="/gat.png">
+
 
 ```
-Bahdanau, Cho & Bengio (2014). Neural machine translation
-by jointly learning to align and translate.
-arXiv preprint arXiv:1409.0473.
+Veličković et al. (2017). Graph attention networks.
+arXiv:1710.10903.
 ```
+</v-click>
+
+---
+layout: full
+color: light
+---
+
+### Non-Transformer Examples
+
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+$$\mathtt{attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V})=\mathtt{softmax}\left(f(\mathbf{Q}, \mathbf{K})\right)\mathbf{V}$$
+
+<br>
+
+<v-click at="1">
+
+| **Model** | $f(\mathbf{Q}, \mathbf{K})$                                                                                                            |
+| :-------: | :----------------------------------------------------------------------------------------------------------------------------: |
+| Gaussian  | $\log\exp\left(\dfrac{(\mathbf{q}-\mathbf{k})^2}{\sigma^2}\right),\quad\forall\mathbf{q}, \mathbf{k}\in\mathbf{Q}, \mathbf{K}$ |
+| Cosine    | $\dfrac{\mathbf{Q}\mathbf{K}^{\intercal}}{\vert\vert\mathbf{Q}\vert\vert\vert\vert\mathbf{K}\vert\vert}$                       |
+| Additive  | $\mathbf{v}^{\intercal}\tanh\left(\mathbf{W}\left[\mathbf{q}\vert\vert\mathbf{k}\right]\right),\quad\forall\mathbf{q}, \mathbf{k}\in\mathbf{Q}, \mathbf{K}$                                |
+| General   | $\mathbf{Q}\mathbf{W}\mathbf{K}^{\intercal}$                                                                                   |
 </v-click>
 
 ---
@@ -767,21 +789,16 @@ align: l-lt-ct
 
 :: left ::
 
-- Transformer attention uses a scaled dot-product kernel function
+- Transformer Attention uses a **masked scaled dot-product** kernel function
 
   $$f(\mathbf{Q}, \mathbf{K})=\dfrac{\mathbf{Q}\mathbf{K}^{\intercal}}{\sqrt{d_{k}}}$$
 
-- $\mathbf{Q}$ is of size $t_{Q}\times d_{K}$
-- $\mathbf{K}$ is of size $t_{V}\times d_{K}$
-- Attention matrix is thus of size $t_{Q}\times t_{V}$
+  - $\mathbf{Q}$ is of size $t_{Q}\times d_{K}$
+  - $\mathbf{K}$ is of size $t_{V}\times d_{K}$
 
 :: right ::
 
-$$\mathtt{attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V})=\mathtt{softmax}\left(f(\mathbf{Q}, \mathbf{K})\right)\mathbf{V}$$
-
-<figure>
-  <img src="/sdpa_self.drawio.svg" style="width: 350px;">
-</figure>
+<img v-click="1" src="/sdpa_self.drawio.svg" style="width: 350px;">
 
 ---
 layout: two-cols-title
@@ -796,7 +813,7 @@ align: l-lt-ct
 
 :: left ::
 
-- Transformer attention uses a scaled dot-product kernel function
+- Transformer Attention uses a **masked scaled dot-product** kernel function
 
   $$f(\mathbf{Q}, \mathbf{K})=\dfrac{\mathbf{Q}\mathbf{K}^{\intercal}}{\sqrt{d_{k}}}$$
 
@@ -830,19 +847,33 @@ align: l-lt-ct
 
 :: left ::
 
+- Transformer Attention uses a **masked scaled dot-product** kernel function
+
+  $$f(\mathbf{Q}, \mathbf{K})=\dfrac{\mathbf{Q}\mathbf{K}^{\intercal}}{\sqrt{d_{k}}}$$
+
+
 - Why mask?
   - Currently all tokens are treated equally
-  - **Causal masking**: decoder tokens should never attend to future tokens, only to the past
-  - **Local masking**: sometimes local attention is all you need
+  <v-click at="1">
 
+  - **Causal masking**: decoder tokens should never attend to future tokens, only to the past
+  </v-click>
+  <v-click at="2">
+
+  - **Local/Global masking**: sometimes local attention is all you need
+  </v-click>
 
 :: right ::
 
 <figure>
+  <div v-click="1">
   <img src="/causal_masking.png" style="width: 100%;">
   <nobr><a href="https://krypticmouse.hashnode.dev/attention-is-all-you-need" style="font-size: 9pt;">https://krypticmouse.hashnode.dev/attention-is-all-you-need</a></nobr>
+  </div>
+  <div v-click="2">
   <img src="/efficient_masking.png" style="width: 100%;">
   <nobr><a href="https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/" style="font-size: 9pt;">https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/</a></nobr>
+  </div>
 </figure>
 
 ---
@@ -907,13 +938,21 @@ align: l-lt-ct
 
 :: left ::
 
-- Where do $\mathbf{V}$, $\mathbf{K}$, $\mathbf{Q}$ come from?
+Where do $\mathbf{V}$, $\mathbf{K}$, $\mathbf{Q}$ come from?
   - **Self-attention**: everything comes from the same sequence
   - **Cross-attention**: $\mathbf{V}$, $\mathbf{K}$ come from source sequence, $\mathbf{Q}$ comes from target sequence
-  - All components constructed from a projection of the token embeddings
-    1. $\mathbf{V}=\mathbf{X}\mathbf{W}_{V}$
-    2. $\mathbf{K}=\mathbf{X}\mathbf{W}_{K}$
-    3. $\underbrace{\mathbf{Q}=\mathbf{X}\mathbf{W}_{Q}}_{\text{Self-attention}}$ or $\underbrace{\mathbf{Q}=\mathbf{Y}\mathbf{W}_{Q}}_{\text{Cross-attention}}$
+
+<v-click>
+
+All components constructed from a projection of the token embeddings
+<div class="ns-c-tight">
+
+  1. $\mathbf{V}=\mathbf{X}\mathbf{W}_{V}$
+  2. $\mathbf{K}=\mathbf{X}\mathbf{W}_{K}$
+  3. $\underbrace{\mathbf{Q}=\mathbf{X}\mathbf{W}_{Q}}_{\text{Self-attention}}$ or $\underbrace{\mathbf{Q}=\mathbf{Y}\mathbf{W}_{Q}}_{\text{Cross-attention}}$
+</div>
+
+</v-click>
 
 :: right ::
 
@@ -925,6 +964,7 @@ align: l-lt-ct
 layout: two-cols-title
 columns: is-6
 align: l-lt-ct
+hide: true
 ---
 
 :: title ::
@@ -955,47 +995,6 @@ The contribution of token $\mathbf{x}_{i}$ to $\mathbf{x}_{j}$, is **not** the s
 <figure>
   <img src="/sdpa_self.drawio.svg" style="width: 350px;">
 </figure>
-
----
-layout: two-cols-title
-columns: is-6
-align: l-lt-ct
----
-
-:: title ::
-
-### Attention in Transformers
-##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
-
-:: left ::
-
-- Transformer attention between two sequences, $\mathbf{X}$ and $\mathbf{Y}$ has a computational cost of (excluding projections):
-  $$\mathcal{O}\left(\underbrace{t_{x}\cdot t_{y}\cdot d_{k}}_{\text{MatMul 1}}+\underbrace{t_{x}\cdot t_{y}\cdot d_{v}}_{\text{MatMul 2}}\right)$$
-
-- But RNNs have linear time complexity...
-  $$\mathcal{O}\left(t_{x}\cdot d_{k}^2 + t_{x}\cdot d_{q}^2\right)$$
-
-- RNNs are serial, Attention is parallel
-  - GPUs *looove* parallelism
-
-:: right ::
-
-<figure>
-  <img src="/sdpa_self.drawio.svg" style="width: 350px;">
-</figure>
-
----
-layout: full
-color: white
----
-
-<a href="https://3.bp.blogspot.com/-aZ3zvPiCoXM/WaiKQO7KRnI/AAAAAAAAB_8/7a1CYjp40nUg4lKpW7covGZJQAySxlg8QCLcBGAs/s640/transform20fps.gif">
-<img src="/transformer_flow_of_information.gif" style="width:55%;display: block;margin-left: auto;margin-right: auto;" alt="GIF of the transformer in action">
-</a>
-```
-Jakob Uszkoreit (August 31, 2017). Transformer: A Novel Neural Network Architecture for Language  Understanding.
-https://research.google/blog/transformer-a-novel-neural-network-architecture-for-language-understanding/
-```
 
 ---
 hideInToc: false
@@ -1106,7 +1105,7 @@ Do different heads attend to different concepts?
 <div class="ns-c-tight">
   <v-click at="1">
 
-  - Individual heads = high rank, concantenated heads = low rank
+  - Individual heads = high rank, concatenated heads = low rank
     ```
     Cordonnier, Loukas & Jaggi (2020). Multi-head attention:
     Collaborate instead of concatenate. arXiv:2006.16362.
@@ -1137,6 +1136,133 @@ Do different heads attend to different concepts?
   <div class="grid-item grid-col-span-2 mt-7" v-click="2"><img style="margin: 0 auto;" src="/heads_dying_by_attn_type_both-min.png"></div>
 </div>
 
+
+---
+hideInToc: false
+layout: two-cols-title
+columns: is-6
+align: l-lt-lt
+---
+
+:: title ::
+
+### Why Attention?
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+:: left ::
+
+<p style="margin: auto;">
+
+**Summary**
+</p>
+
+<div class="ns-c-tight">
+<v-click at="1">
+
+1. Attention is a **linear map** $\mathbf{A}\mathbf{V}$ where $\mathbf{A}$ is dynamically constructed from $f\left(\mathbf{Q}, \mathbf{K}\right)$
+</v-click>
+<v-click at="2">
+
+2. The values of $\mathbf{A}$ are all in $(0,1)$, making $\mathbf{A}\mathbf{V}$ a convex combination/weighted mean of $\mathbf{V}$
+</v-click>
+<v-click at="3">
+
+3. Attention is does not understand word order
+</v-click>
+<v-click at="4">
+
+4. In Transformers, Attention is used to :
+    - add context from self (self-attention)
+    - add context from others (cross-attention)
+</v-click>
+<v-click at="5">
+
+5. Attention cost scales quadratically with sequence length
+
+</v-click>
+
+</div>
+
+:: right ::
+
+<img src="/sdpa_self.drawio.svg">
+
+---
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+
+:: title ::
+
+### Why Attention?
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+:: left ::
+
+- Transformer attention between two sequences, $\mathbf{X}$ and $\mathbf{Y}$ has a computational cost of (excluding projections):
+  $$\mathcal{O}\left(\underbrace{t_{x}\cdot t_{y}\cdot d_{k}}_{\text{MatMul 1}}+\underbrace{t_{x}\cdot t_{y}\cdot d_{v}}_{\text{MatMul 2}}\right)$$
+
+<v-click>
+
+- But RNNs have linear time complexity...
+  $$\mathcal{O}\left(t_{x}\cdot d_{k}^2 + t_{x}\cdot d_{q}^2\right)$$
+
+</v-click>
+
+:: right ::
+
+<img src="/sdpa_self.drawio.svg">
+
+---
+hideInToc: false
+layout: two-cols-title
+columns: is-6
+align: l-lt-lt
+---
+
+:: title ::
+
+### Why Attention?
+##### <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+
+:: left ::
+
+<p style="margin: auto;">
+
+**Summary**
+</p>
+
+<div class="ns-c-tight">
+
+1. Attention is a **linear map** $\mathbf{A}\mathbf{V}$ where $\mathbf{A}$ is dynamically constructed from $f\left(\mathbf{Q}, \mathbf{K}\right)$
+2. The values of $\mathbf{A}$ are all in $(0,1)$, making $\mathbf{A}\mathbf{V}$ a convex combination/weighted mean of $\mathbf{V}$
+3. Attention is does not understand word order
+4. In Transformers, Attention is used to:
+    - add context from self (self-attention)
+    - add context from others (cross-attention)
+5. Attention cost scales quadratically with sequence length
+6. **Attention is parallelizable**
+
+</div>
+
+:: right ::
+
+<img src="/sdpa_self.drawio.svg">
+
+---
+layout: full
+color: white
+---
+
+<a href="https://3.bp.blogspot.com/-aZ3zvPiCoXM/WaiKQO7KRnI/AAAAAAAAB_8/7a1CYjp40nUg4lKpW7covGZJQAySxlg8QCLcBGAs/s640/transform20fps.gif">
+<img src="/transformer_flow_of_information.gif" style="width:55%;display: block;margin-left: auto;margin-right: auto;" alt="GIF of the transformer in action">
+</a>
+```
+Jakob Uszkoreit (August 31, 2017). Transformer: A Novel Neural Network Architecture for Language  Understanding.
+https://research.google/blog/transformer-a-novel-neural-network-architecture-for-language-understanding/
+```
+
 ---
 hideInToc: false
 layout: side-title
@@ -1164,6 +1290,7 @@ layout: default
 
 
 ---
+hideInToc: false
 layout: default
 ---
 
@@ -1171,6 +1298,7 @@ layout: default
 ##### <span class="bg-lime-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Add & Norm</span>
 
 ---
+hideInToc: false
 layout: two-cols-title
 columns: is-6
 align: l-lt-lt
@@ -1196,12 +1324,14 @@ $$
 $$
 
 ---
+hideInToc: false
 layout: default
 ---
 
 ## <span class="bg-blue-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Feed Forward</span>
 
 ---
+hideInToc: false
 layout: section
 title: "Embedding"
 color: dark
@@ -1212,12 +1342,14 @@ align: l-lt-lt
 # Embedding
 
 ---
+hideInToc: false
 layout: default
 ---
 
 ## <span class="bg-green-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Position Encoding</span>
 
 ---
+hideInToc: false
 layout: section
 color: dark
 columns: is-6
@@ -1227,6 +1359,7 @@ align: l-lt-lt
 # Tokenization
 
 ---
+hideInToc: false
 layout: section
 color: dark
 columns: is-6
