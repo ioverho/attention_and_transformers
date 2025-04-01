@@ -320,29 +320,6 @@ align: l-lt-lt
 
 ---
 hideInToc: false
-layout: section
-color: dark
----
-
-# Encoders & Decoders
-
-Text comes in, text goes out
-
----
-title: "Attention Blocks"
-hideInToc: false
-layout: section
-color: dark
-columns: is-6
-align: l-lt-lt
----
-
-# Attention Blocks
-
-What makes the Transformer what it is --- and where it came from
-
----
-hideInToc: false
 layout: side-title
 color: dark
 side: l
@@ -352,7 +329,7 @@ align: lm-mt
 
 :: title::
 
-## <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
+# <span class="bg-orange-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Multi-head Attention</span>
 
 :: content ::
 
@@ -362,6 +339,7 @@ align: lm-mt
 
 ---
 hideInToc: false
+level: 2
 layout: two-cols-title
 columns: is-6
 align: l-lt-lt
@@ -577,6 +555,7 @@ $$
 
 ---
 hideInToc: false
+level: 2
 layout: two-cols-title
 columns: is-6
 align: l-lt-cm
@@ -777,6 +756,7 @@ $$\mathtt{attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V})=\mathtt{softmax}\left(f
 
 ---
 hideInToc: false
+level: 2
 layout: two-cols-title
 columns: is-6
 align: l-lt-ct
@@ -998,6 +978,7 @@ The contribution of token $\mathbf{x}_{i}$ to $\mathbf{x}_{j}$, is **not** the s
 
 ---
 hideInToc: false
+level: 2
 layout: two-cols-title
 columns: is-6
 align: l-lt-ct
@@ -1139,6 +1120,7 @@ Do different heads attend to different concepts?
 
 ---
 hideInToc: false
+level: 2
 layout: two-cols-title
 columns: is-6
 align: l-lt-lt
@@ -1206,7 +1188,7 @@ align: l-lt-ct
 <v-click>
 
 - But RNNs have linear time complexity...
-  $$\mathcal{O}\left(t_{x}\cdot d_{k}^2 + t_{x}\cdot d_{q}^2\right)$$
+  $$\mathcal{O}\left(\underbrace{t_{x}\cdot d_{x}\cdot d_{h}}_{x_t} + \underbrace{t_{x}\cdot d_{h}^2}_{h_{t-1}}\right)$$
 
 </v-click>
 
@@ -1215,7 +1197,6 @@ align: l-lt-ct
 <img src="/sdpa_self.drawio.svg">
 
 ---
-hideInToc: false
 layout: two-cols-title
 columns: is-6
 align: l-lt-lt
@@ -1253,6 +1234,7 @@ align: l-lt-lt
 ---
 layout: full
 color: white
+title: "Information Flow"
 ---
 
 <a href="https://3.bp.blogspot.com/-aZ3zvPiCoXM/WaiKQO7KRnI/AAAAAAAAB_8/7a1CYjp40nUg4lKpW7covGZJQAySxlg8QCLcBGAs/s640/transform20fps.gif">
@@ -1274,7 +1256,7 @@ align: lm-mt
 
 :: title::
 
-## <span class="bg-lime-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Add & Norm</span>
+# <span class="bg-blue-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Feed Forward</span>
 
 :: content ::
 
@@ -1283,22 +1265,104 @@ align: lm-mt
 </figure>
 
 ---
-layout: default
+color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-lt
 ---
 
-## <span class="bg-lime-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Add & Norm</span>
+:: title::
 
+### Non-linearities
+##### <span class="bg-blue-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Feed Forward</span>
+
+:: left ::
+
+- Attention is just a fancy linear map*
+  - Neural nets need non-linear operations
+
+<v-click at="1">
+
+- Add pointwise feed-forward nets for non-linear expressiveness
+  - Just an MLP applied to each time step
+
+</v-click>
+
+<v-click at="2">
+
+- Assume $d_{\mathtt{ff}}\gg d_{V}$
+  - Depth is serial
+  - Width is parallel
+
+</v-click>
+
+<br>
+
+<small>\* More or less</small>
+
+:: right ::
+
+<img v-click="1" src="/feed_forward_net.drawio.svg">
+
+---
+color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-lt
+---
+
+:: title::
+
+### Necessity of Feed Forward Nets
+##### <span class="bg-blue-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Feed Forward</span>
+
+:: left ::
+
+<br>
+
+- Is attention all you need?
+- Without feed forward nets, transformer token representations collapse
+  - Occurs *doubly exponential* with depth (very, very fast)
+  ```
+  Dong, Cordonnier, & Loukas (2021). Attention is not all
+  you need: Pure attention loses rank doubly exponentially
+  with depth. PMLR
+  ```
+
+:: right ::
+
+<div class="grid w-full h-full grid-cols-2" style="margin: 0">
+  <div class="grid-item grid-col-span-1 mt-10" v-click="0"><img class="h-full" style="margin: 0 auto;" src="/token_uniformity_low_depth.png"></div>
+  <div class="grid-item grid-col-span-1 mt-10" v-click="0"><img class="h-full" style="margin: 0 auto;" src="/token_uniformity_high_depth.png"></div>
+</div>
+
+```
+Noci et al. (2022). Signal Propagation in Transformers:
+Theoretical Perspectives and the Role of Rank Collapse.
+arXiv:2206.03126.
+```
 
 ---
 hideInToc: false
-layout: default
+layout: side-title
+color: dark
+side: l
+titlewidth: is-5
+align: lm-mt
 ---
 
-### Residual Connections
-##### <span class="bg-lime-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Add & Norm</span>
+:: title::
+
+# <span class="bg-lime-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Add & Norm</span>
+
+:: content ::
+
+<img src="/transformer_svg.svg" style="width:100%;display: block;margin-left: auto;margin-right: auto;">
 
 ---
 hideInToc: false
+level: 2
+color: light
 layout: two-cols-title
 columns: is-6
 align: l-lt-lt
@@ -1306,47 +1370,410 @@ align: l-lt-lt
 
 :: title ::
 
-### LayerNorm
+### Residual Connections
 ##### <span class="bg-lime-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Add & Norm</span>
 
-::left::
+:: left ::
 
-These are the equations
+- After each operation, the input is added back in
+  $$x^{l+1}=\mathtt{SubLayer}(x^{l})+x^{l}$$
 
-::right::
+- Makes deep architectures optimisable
 
-$$
-\begin{aligned}
-\mathbf{X}_{l}~~=~~&\mathtt{LayerNorm}( \\
-&~~\mathbf{X}_{l-1}+\texttt{SubLayer}\left(\mathbf{X}_{l-1}\right) \\
-&)
-\end{aligned}
-$$
+  ```
+  He et al. (2015). Deep residual learning for image
+  recognition. arXiv:1512.03385
+  ```
 
----
-hideInToc: false
-layout: default
----
+:: right ::
 
-## <span class="bg-blue-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Feed Forward</span>
+<img src="/transformer_svg.svg" style="width:100%;display: block;margin-left: auto;margin-right: auto;">
 
 ---
 hideInToc: false
-layout: section
-title: "Embedding"
-color: dark
+level: 2
+color: light
+layout: two-cols-title
 columns: is-6
 align: l-lt-lt
 ---
 
-# Embedding
+:: title ::
+
+### Layer Norm
+##### <span class="bg-lime-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Add & Norm</span>
+
+:: left ::
+
+- After each operation and residual connection, normalize
+  $$x^{l+1}=\mathtt{LayerNorm}(\mathtt{SubLayer}(x^{l})+x^{l})$$
+
+- LayerNorm in Transformers is per token
+
+- Makes neural nets converge faster
+  ```
+  Ba, Kiros & Hinton (2016). Layer normalization.
+  arXiv:1607.06450
+  ```
+
+:: right ::
+
+<img src="/layer_norm.png" style="width:100%;display: block;margin-left: auto;margin-right: auto;">
+
+```
+Yao et al. (2021). Leveraging batch normalization for vision
+transformers. In Proceedings of the IEEE/CVF International
+Conference on Computer Vision (pp. 413-422).
+```
 
 ---
 hideInToc: false
-layout: default
+layout: section
+color: dark
+side: l
+titlewidth: is-5
+align: lm-mt
 ---
 
-## <span class="bg-green-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Position Encoding</span>
+# Embeddings
+
+From words to vectors and back
+
+---
+color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-lt
+---
+
+:: title ::
+
+### Embedding Types
+##### Embeddings
+
+:: left ::
+
+Transformers apply two embeddings:
+1. <span class="bg-red-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Token Embedding</span> transform token IDs into vectors
+2. <span class="bg-green-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Position Encodings</span> add information about token location
+
+:: right ::
+
+<img src="/transformer_svg.svg" style="width:100%;display: block;margin-left: auto;margin-right: auto;">
+
+---
+hideInToc: false
+level: 2
+title: '<span class="bg-red-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Token Embedding</span>'
+color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-lt
+---
+
+:: title ::
+
+Token to vector
+##### <span class="bg-red-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Token Embedding</span>
+
+:: left ::
+
+- Convert strings to dense representations
+  - Typically done using dictionary lookup
+
+<v-click at="1">
+
+- Memory cost: $\mathcal{O}(|\mathcal{V}|\cdot d_{v})$
+    - Usually most expensive operation
+    - Can save cost by have embedding matrices share weights
+
+</v-click>
+<v-click at="2">
+
+- Typically *not* pre-trained
+
+</v-click>
+
+:: right ::
+
+<img src="/word_vectors.svg" style="width: 400px;margin: auto;">
+
+---
+hideInToc: false
+level: 2
+title: '<span class="bg-green-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Positional Encoding</span>'
+color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+
+:: title ::
+
+### Permutation Equivariance Revisited
+##### <span class="bg-green-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Positional Encoding</span>
+
+:: left ::
+
+<Admonition title="Permutation Equivariance" color="light" width="100%" icon="mdi-pencil">
+
+Attention is permutation *equivariant* to a changes in the word order of its input
+
+</Admonition>
+
+- From NLP1: word order is pretty important for modelling language...
+
+<v-click>
+
+- Solution: add token position information to token embedding
+  $$\mathtt{embed}(\mathtt{string}[t])+\mathtt{position}(t)$$
+
+</v-click>
+
+:: right ::
+
+'Only I love you'
+
+=
+
+'I only love you'
+
+=
+
+'I love only you'
+
+=
+
+'I love only you, only...'
+
+---
+color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+
+:: title ::
+
+### Learning Position Embeddings
+##### <span class="bg-green-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Positional Encoding</span>
+
+:: left ::
+
+**Proposal 1**: learn per-position offsets manually
+
+<v-click at="1">
+
+1. Deterministic [<span class="text-green-500">✓</span>]
+2. Distinct at all time-steps [<span class="text-amber-500">?</span>]
+
+</v-click>
+
+<v-click at="2">
+
+3. Extends to different sequence lengths [<span class="text-red-500">X</span>]
+4. Encodes relative positions [<span class="text-amber-500">?</span>]
+
+</v-click>
+
+<v-click at="3">
+
+Not a terrible idea
+
+</v-click>
+
+:: right ::
+
+<v-click at="3">
+
+| **Model**                    | **PPL (dev)** | **BLEU (test)** | **Params $\times 10^6$** |
+| :--------------------------: | :-----------: | :-------------: | :----------------------: |
+| Base                         | 4.92          | 25.8            | 65                       |
+| Learned  Positional Encoding | 4.92          | 25.7            | 65                       |
+
+</v-click>
+
+---
+color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+
+:: title ::
+
+### Bits as Position Encoding
+##### <span class="bg-green-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Positional Encoding</span>
+
+:: left ::
+
+**Proposal 2**: add the offsets in bit representations to the embeddings
+
+<v-click at="1">
+
+1. Deterministic [<span class="text-green-500">✓</span>]
+2. Distinct at all time-steps [<span class="text-green-500">✓</span>]
+3. Extends to different sequence lengths [<span class="text-green-500">✓</span>]*
+4. Encodes relative positions [<span class="text-red-500">X</span>]
+
+</v-click>
+
+<v-click at="2">
+
+5. Elegant [<span class="text-red-500">X</span>]
+
+</v-click>
+
+<v-click at="2">
+
+<small>* Maximum sequence length is now $2^{d_{\text{model}}}$</small>
+
+</v-click>
+
+:: right ::
+
+<figure>
+  <img src="/position_encoding_bits_1.svg">
+  <img v-click="3" src="/position_encoding_bits_2.svg">
+  <img v-click="4" src="/position_encoding_bits_3.svg">
+</figure>
+
+---
+color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+
+:: title ::
+
+### Sinusoidal Position Encoding
+##### <span class="bg-green-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Positional Encoding</span>
+
+:: left ::
+
+**Proposal 3**: use sinusoidal position encoding
+
+$$
+\begin{aligned}
+\mathtt{Position}(t)&=\begin{cases}
+\sin\left(\omega_i\cdot t\right), \mod(i, 2) = 0 \\
+\cos\left(\omega_i\cdot t\right), \mod(i, 2) \not= 0
+\end{cases} \\
+&\omega_i=k^{-2i/d_{\text{model}}}
+\end{aligned}
+$$
+
+- First dimensions get very quickly oscillating sinusoid
+- Last dimensions get very slow oscillating sinusoid
+
+:: right ::
+
+<figure>
+  <img src="/position_encoding_sinusoid_3.svg">
+</figure>
+
+---
+color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+
+:: title ::
+
+### Sinusoidal Position Encoding
+##### <span class="bg-green-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Positional Encoding</span>
+
+:: left ::
+
+Relative positions can now be represented as a linear mapping, dependent on the offset
+
+Neural nets can learn this offset
+
+:: right ::
+
+$$
+\begin{aligned}
+&\mathtt{Position}(t+\Delta t)=\begin{bmatrix}
+\sin\left(\omega_i\cdot (t+\Delta t)\right) \\
+\cos\left(\omega_i\cdot (t+\Delta t)\right)
+\end{bmatrix} \\
+&=\begin{bmatrix}
+\cos \Delta t & \sin \Delta t \\
+-\sin \Delta t & \cos \Delta t
+\end{bmatrix}\begin{bmatrix}
+\sin\left(\omega_i\cdot t\right) \\
+\cos\left(\omega_i\cdot t\right)
+\end{bmatrix} \\
+&=\begin{bmatrix}
+\cos \Delta t & \sin \Delta t \\
+-\sin \Delta t & \cos \Delta t
+\end{bmatrix}\mathtt{Position}(t) \\
+&=\mathbf{A}_{\Delta t}\mathtt{Position}(t)
+\end{aligned}
+$$
+
+---
+color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+
+:: title ::
+
+### Sinusoidal Position Encoding
+##### <span class="bg-green-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Positional Encoding</span>
+
+:: left ::
+
+Cosine distance between time-steps decreases with offset magnitude
+
+<small>[For proofs & more, see here](https://numb3r33.github.io/experiments/llm/transformers/math/deeplearning/2025/02/22/transformers-positional-encoding.html#Approaches-to-Positional-Encoding)</small>
+
+:: right ::
+
+<figure>
+  <img src="/position_encoding_sinusoid_relative.svg">
+</figure>
+
+---
+color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+
+:: title ::
+
+### Sinusoidal Position Encoding
+##### <span class="bg-green-100 text-black p-0.5 pl-2 pr-2 m-0 rounded">Positional Encoding</span>
+
+:: left ::
+
+**Proposal 3**: use sinusoidal position encoding
+
+1. Deterministic [<span class="text-green-500">✓</span>]
+2. Distinct at all time-steps [<span class="text-green-500">✓</span>]
+3. Extends to different sequence lengths [<span class="text-green-500">✓</span>]
+4. Encodes relative positions [<span class="text-green-500">✓</span>]
+5. Elegant [<span class="text-green-500">✓</span>]
+
+<v-click at="1">
+
+6. Optimal [<span class="text-amber-500">???</span>]
+7. Necessary [<span class="text-amber-500">???</span>]
+
+[See this HF blog for more good ideas](https://huggingface.co/blog/designing-positional-encoding)
+
+</v-click>
+
+:: right ::
+
+<figure>
+  <img src="/position_encoding_sinusoid_3.svg">
+</figure>
 
 ---
 hideInToc: false
