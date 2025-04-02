@@ -1624,7 +1624,7 @@ align: l-lt-ct
 
 </v-click>
 
-<v-click at="2">
+<v-click at="1">
 
 <small>* Maximum sequence length is now $2^{d_{\text{model}}}$</small>
 
@@ -1784,6 +1784,144 @@ align: l-lt-lt
 ---
 
 # Tokenization
+
+---
+color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+
+:: title ::
+
+### Vocabulary Size
+##### Tokenization
+
+:: left ::
+
+- Base transformer achieved SoTA translation with only 65M parameters
+
+<v-click at="1">
+
+- English has $|\mathcal{V}_{\text{src}}|\approx1M$ words
+</v-click>
+<v-click at="2">
+
+- Assume target language has $|\mathcal{V}_{\text{tgt}}|\approx1M$*
+</v-click>
+<v-click at="3">
+
+- Cost of word embedding and unembedding **alone** is
+  $$3\times 1\cdot 10^6\times 512\approx 1.5\cdot 10^9$$
+  parameters...
+</v-click>
+
+<v-click at="2">
+<small>* Not realistic</small>
+</v-click>
+
+:: right ::
+
+| Name | N   | $d_{\text{model}}$ | $d_{\mathtt{ff}}$ | $h$ | $d_{k}$ | $d_{v}$ | Params $\times 10^6$ |
+| ---- | --- | ------------------ | ----------------- | --- | ------- | ------- | -------------------- |
+| base | 6   | 512                | 2048              | 8   | 64      | 64      | 65                   |
+| big  | 6   | 1024               | 4096              | 16  | 64      | 64      | 213                  |
+
+---
+color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+
+:: title ::
+
+### Vocabulary Size
+##### Tokenization
+
+:: left ::
+
+- **Problem**: embedding cost scales with $|\mathcal{V}|$
+  - Most words occur infrequently
+  - Some unknown words are likely to exist
+
+<v-click at="1">
+
+- **Solution**: sub-word tokenization
+</v-click>
+
+<v-click at="3">
+
+- Which subwords?
+</v-click>
+
+:: right ::
+
+<v-click at="2">
+
+| **Unit**   | **Vocab Size**                                                                  | **Semantic Density**                                                            | **Sequence Length**                                                             |
+| :--------: | :-----------------------------------------------------------------------------: | :-----------------------------------------------------------------------------: | :-----------------------------------------------------------------------------: |
+| Words      | <span class="bg-red-800 text-white p-0.5 pl-2 pr-2 m-0 rounded">Large</span>    | <span class="bg-green-800 text-white p-0.5 pl-2 pr-2 m-0 rounded">High</span>   | <span class="bg-green-800 text-white p-0.5 pl-2 pr-2 m-0 rounded">Low</span>    |
+| Characters | <span class="bg-green-800 text-white p-0.5 pl-2 pr-2 m-0 rounded">Small</span>  | <span class="bg-red-800 text-white p-0.5 pl-2 pr-2 m-0 rounded">Low</span>      | <span class="bg-red-800 text-white p-0.5 pl-2 pr-2 m-0 rounded">High</span>     |
+| Subwords   | <span class="bg-amber-500 text-white p-0.5 pl-2 pr-2 m-0 rounded">Medium</span> | <span class="bg-amber-500 text-white p-0.5 pl-2 pr-2 m-0 rounded">Medium</span> | <span class="bg-amber-500 text-white p-0.5 pl-2 pr-2 m-0 rounded">Medium</span> |
+
+</v-click>
+
+<v-click at="2">
+
+"Hello, y'all! How are you 😁 ?"
+
+`<_Hello> <,> <_y’> <all> <!> <_How> <_are> <_you> <[UNK]> <?>`
+
+"The best gradient descent method is grad student descent"
+
+`<_The> <_best> <_grad> <i> <ent> <_desc> <ent> <_method> <_is> <_grad> <_stud> <ent> <_desc> <ent>`
+
+</v-click>
+
+---
+color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-lt
+---
+
+:: title ::
+
+### Subwords Selection
+##### Tokenization
+
+:: left ::
+
+Vaswani et al. used Byte Pair Encodings (BPE) to automatically select 37k subword units
+
+<v-click at="1">
+
+"Hello, y'all! How are you 😁 ?"
+
+`<_Hello> <,> <_y’> <all> <!> <_How> <_are> <_you> <[UNK]> <?>`
+
+</v-click>
+<v-click at="2">
+
+"The best gradient descent method is grad student descent"
+
+`<_The> <_best> <_grad> <i> <ent> <_desc> <ent> <_method> <_is> <_grad> <_stud> <ent> <_desc> <ent>`
+
+</v-click>
+
+For other subword tokenizers, see [here](https://huggingface.co/learn/nlp-course/chapter2/4#subword-tokenization) or [here](https://huggingface.co/learn/nlp-course/chapter6/5)
+
+:: right ::
+
+<img src="/bpe.png">
+```txt
+Kawano Koide & Imamura (2019). Seq2seq fingerprint with
+byte-pair encoding for predicting changes in protein stability
+upon single point mutation. IEEE/ACM transactions on
+computational biology and bioinformatics, 17(5), 1762-1772.
+```
+
 
 ---
 hideInToc: false
