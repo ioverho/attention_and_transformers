@@ -1867,18 +1867,6 @@ align: l-lt-ct
 
 </v-click>
 
-<v-click at="2">
-
-"Hello, y'all! How are you 😁 ?"
-
-`<_Hello> <,> <_y’> <all> <!> <_How> <_are> <_you> <[UNK]> <?>`
-
-"The best gradient descent method is grad student descent"
-
-`<_The> <_best> <_grad> <i> <ent> <_desc> <ent> <_method> <_is> <_grad> <_stud> <ent> <_desc> <ent>`
-
-</v-click>
-
 ---
 color: light
 layout: two-cols-title
