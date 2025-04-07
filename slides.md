@@ -1209,10 +1209,11 @@ align: l-lt-lt
 
 :: left ::
 
-<p style="margin: auto;">
+<div style="margin: auto;">
 
 **Summary**
-</p>
+
+</div>
 
 <div class="ns-c-tight">
 
@@ -1387,7 +1388,7 @@ align: l-lt-lt
 
 :: right ::
 
-<img src="/transformer_svg.svg" style="width:100%;display: block;margin-left: auto;margin-right: auto;">
+<img src="/ln_location.drawio.svg" style="width:80%;display: block;margin-left: auto;margin-right: auto;">
 
 ---
 hideInToc: false
@@ -1414,6 +1415,13 @@ align: l-lt-lt
   ```
   Ba, Kiros & Hinton (2016). Layer normalization.
   arXiv:1607.06450
+  ```
+
+- Modern transformers prefer $\mathtt{LayerNorm}$ **both** before and after operations
+  ```
+  Shleifer, Weston, & Ott (2021). Normformer: Improved
+  transformer pretraining with extra normalization.
+  arXiv:2110.09456.
   ```
 
 :: right ::
@@ -1910,6 +1918,18 @@ upon single point mutation. IEEE/ACM transactions on
 computational biology and bioinformatics, 17(5), 1762-1772.
 ```
 
+---
+color: light
+layout: full
+---
+
+<div class="grid w-full h-full grid-cols-4 grid-rows-2" style="margin: 0">
+  <div class="grid-item grid-col-span-1 grid-row-span-1 mt-0" v-click="3"><img class="h-full" style="margin: 0 auto;" src="/feed_forward_net.drawio.svg"></div>
+  <div class="grid-item grid-col-span-2 grid-row-span-2 mt-0"><img class="h-full" style="margin: 0 auto;" src="/transformer_svg.svg"></div>
+  <div class="grid-item grid-col-span-1 grid-row-span-1 mt-0" v-click="1"><img class="h-full" style="margin: 0 auto;" src="/multihead_attention.drawio.svg"></div>
+<div class="grid-item grid-col-span-1 grid-row-span-1 mt-0"><img class="h-full" style="margin: 0 auto;" src="/ln_location.drawio.svg" v-click="4"></div>
+  <div class="grid-item grid-col-span-1 grid-row-span-1 mt-0" v-click="2"><img class="h-full" style="margin: 0 auto;" src="/sdpa_self.drawio.svg"></div>
+</div>
 
 ---
 hideInToc: false
@@ -1920,6 +1940,188 @@ align: l-lt-lt
 ---
 
 # Training Transformers
+
+---
+color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-ct
+---
+
+:: title ::
+
+### Learning Rate Scheduling
+##### Training Transformers
+
+:: left ::
+
+- Pre-training Transformers is unstable
+
+- Vaswani et al. use a combination of **linear warmup** and **inverse square root decay**
+
+  $$\mathtt{lrate} = d^{−0.5}_{\text{model}}\cdot \min(t^{−0.5}, t\cdot t_{\text{warmup}}^{−1.5})$$
+
+<v-click>
+
+- Decreases impact of earliest steps (noise)
+- Avoids plateaus towards end of training
+
+</v-click>
+
+:: right ::
+
+<div class="grid w-full h-full grid-cols-1 grid-rows-2" style="margin: 0">
+  <div class="grid-item grid-col-span-1 grid-row-span-1"><img src="/learning_rates_by_dimension.svg"></div>
+  <div class="grid-item grid-col-span-1 grid-row-span-1"><img src="/learning_rates_by_warmup.svg"></div>
+</div>
+
+---
+color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-lt
+---
+
+:: title ::
+
+### Learning Rate Scheduling
+##### Training Transformers
+
+:: left ::
+
+- Without warmup `Adam` gradient distributions collapse
+
+<v-click at="1">
+
+- Other warmup strategies that stabilize training:
+  - Batch size
+  - Sequence length
+
+</v-click>
+
+<v-click at="2">
+
+- `Adam` variants have been proposed
+  - For fine-tuning, `AdamW` is still king
+
+</v-click>
+
+:: right ::
+
+<img src="/updates_histogram.svg" width="100%">
+
+```
+Liu et al. (2019). On the variance of the adaptive learning
+rate and beyond. arXiv:1908.03265.
+```
+
+---
+color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-lt
+---
+
+:: title ::
+
+### Fine-tuning Approaches
+##### Training Transformers
+
+:: left ::
+
+- High variance in random seeds
+  > Start many, stop early, continue some
+
+  ```
+  Dodge et al. (2020) Fine-tuning pretrained language
+  models: Weight initializations, data orders, and
+  early stopping. arXiv:2002.06305
+  ```
+
+:: right ::
+
+<div class="grid w-full h-full grid-cols-1 grid-rows-2" style="margin: 0">
+  <div class="grid-item grid-col-span-1 grid-row-span-1"><img src="/seed_randomness_upper.png"></div>
+  <div class="grid-item grid-col-span-1 grid-row-span-1"><img src="/seed_randomness_lower.png"></div>
+</div>
+
+---
+color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-lt
+---
+
+:: title ::
+
+### Fine-tuning Approaches
+##### Training Transformers
+
+:: left ::
+
+- Assume $\mathcal{D}^{\text{(pre-train)}}\gg \mathcal{D}^{\text{(fine-tune)}}$
+
+<v-click at="1">
+
+- Some tips:
+    - **Intermediate task transfer**: first fine-tune on large related task, then fine-tun on small task
+
+  <v-click at="2">
+
+    - **Re-init**: completely re-train last layers
+
+  </v-click>
+
+  <v-click at="3">
+
+    - **Layer-wise Learning Rate Decay**:
+      - low layers are general $\rightarrow$ low lr
+      - high layers are task-specific $\rightarrow$ high lr
+
+  </v-click>
+
+</v-click>
+
+:: right ::
+
+<v-click at="2">
+
+<img src="/reinit_by_layer.svg">
+```
+Zhang (2020). Revisiting few-sample BERT fine-tuning.
+arXiv:2006.05987.
+```
+
+</v-click>
+
+---
+color: light
+layout: two-cols-title
+columns: is-6
+align: l-lt-lt
+---
+
+:: title ::
+
+### Fine-tuning Approaches
+##### Training Transformers
+
+:: left ::
+
+- Biggest contraints are:
+  1. Amount of data
+  2. Compute budget
+
+- If you have little data, long fine-tuning runs might still help
+
+:: right ::
+
+<img src="/train_loss_vs_test_accuracy.svg">
+```
+Mosbach, Andriushchenko, Klakow (2020). On the stability
+of fine-tuning bert: Misconceptions, explanations, and
+strong baselines. arXiv:2006.04884.
+```
 
 ---
 layout: "end"
