@@ -362,9 +362,13 @@ align: l-lt-lt
 <v-click at="1">
 
 - $\mathtt{Attention}$ is just a matrix product of $\mathbf{V}$ with an attention matrix $\mathbf{A}$
-  - $\mathbf{A}$ is a square matrix of size $t_{V}\times t_{V}$
+  - $\mathbf{A}$ is a matrix of size $t_{V}\times t_{V}$*
   - It's elements are all between $(0, 1)$
   - It's rows sum to $1$
+
+<br>
+
+<small>* Usually not square</small>
 
 </v-click>
 
